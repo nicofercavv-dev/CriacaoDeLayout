@@ -1,7 +1,10 @@
+//Variável de armazenamento dos dados dos alunos
 let Alunos = [];
 
+//Arrow function para cálculo da média final
 const tirarMediaFinal = (nota1, nota2) => (nota1 + nota2) / 2;
 
+//Função de capitalização da primeira letra dos nomes dos alunos
 function capitalizarPrimeiraLetraDeCadaNome(Obj) {
     let nomeParaCapitalizacao = Obj.nome.split(" ");
 
@@ -14,6 +17,7 @@ function capitalizarPrimeiraLetraDeCadaNome(Obj) {
     return Obj;
 }
 
+//Função que verifica a aprovação através das propriedades mediaFinal e frequencia do objeto que foi passado como parâmetro e adiciona o resultado na propriedade aprovado, ao final o objeto é retornado
 function verificarAprovacao(Obj) {
     if(Obj.mediaFinal < 7 || Obj.frequencia < 75) {
         Obj.aprovado = false;
@@ -24,6 +28,7 @@ function verificarAprovacao(Obj) {
     return Obj;
 }
 
+//Função que obtém os dados do aluno, armazena no objeto NovoAluno e o retorna
 function registrarDadosAluno() {
     let NovoAluno = {
         numero: 0,
@@ -43,53 +48,56 @@ function registrarDadosAluno() {
     NovoAluno.mediaFinal = tirarMediaFinal(NovoAluno.notaPrimeiroSemestre, NovoAluno.notaSegundoSemestre);
     NovoAluno.frequencia = parseFloat(prompt("Frequência em porcentagem(sem o %):"));
 
-    NovoAluno = capitalizarPrimeiraLetraDeCadaNome(NovoAluno);
-    NovoAluno = verificarAprovacao(NovoAluno);
-
     return NovoAluno;
 }
 
+//Função que adiciona um novo aluno no "sistema"
 function adicionarNovoAluno(array) {
     let NovoAluno;
     NovoAluno = registrarDadosAluno();
+    NovoAluno = capitalizarPrimeiraLetraDeCadaNome(NovoAluno);
+    NovoAluno = verificarAprovacao(NovoAluno);
     array.push(NovoAluno);
 }
 
+//Função que gera a tabela com os dados armazenados no objeto Alunos
 function gerarTabela(array) {
-    var body = document.getElementById('body');
-    var tabela = document.createElement('table');
-    var titulo = document.createElement('caption');
-    titulo.innerHTML = "Boletim";
-    var cabecalho = document.createElement('thead');
-    var campoPrincipal = document.createElement('tbody');
-    var titulos = document.createElement('tr');
-    var ordemNumerica = document.createElement('th');
-    ordemNumerica.innerHTML = "";
-    ordemNumerica.classList.add('vazio');
-    var tituloNome = document.createElement('th');
-    tituloNome.innerHTML = "Nome";
-    var tituloNota1 = document.createElement('th');
-    tituloNota1.innerHTML = "1° Semestre";
-    var tituloNota2 = document.createElement('th');
-    tituloNota2.innerHTML = "2° Semestre";
-    var tituloNotaFinal = document.createElement('th');
-    tituloNotaFinal.innerHTML = "Nota Final";
-    var tituloFrequencia = document.createElement('th');
-    tituloFrequencia.innerHTML = "Frequência";
-
-    body.appendChild(tabela);
-    tabela.appendChild(titulo);
-    tabela.appendChild(cabecalho);
-    cabecalho.appendChild(titulos);
-    tabela.appendChild(campoPrincipal);
-    titulos.appendChild(ordemNumerica);
-    titulos.appendChild(tituloNome);
-    titulos.appendChild(tituloNota1);
-    titulos.appendChild(tituloNota2);
-    titulos.appendChild(tituloNotaFinal);
-    titulos.appendChild(tituloFrequencia);
 
     if(array.length > 0) {
+
+        var body = document.getElementById('body');
+        var tabela = document.createElement('table');
+        var titulo = document.createElement('caption');
+        titulo.innerHTML = "Boletim";
+        var cabecalho = document.createElement('thead');
+        var campoPrincipal = document.createElement('tbody');
+        var titulos = document.createElement('tr');
+        var ordemNumerica = document.createElement('th');
+        ordemNumerica.innerHTML = "";
+        ordemNumerica.classList.add('vazio');
+        var tituloNome = document.createElement('th');
+        tituloNome.innerHTML = "Nome";
+        var tituloNota1 = document.createElement('th');
+        tituloNota1.innerHTML = "1° Semestre";
+        var tituloNota2 = document.createElement('th');
+        tituloNota2.innerHTML = "2° Semestre";
+        var tituloNotaFinal = document.createElement('th');
+        tituloNotaFinal.innerHTML = "Nota Final";
+        var tituloFrequencia = document.createElement('th');
+        tituloFrequencia.innerHTML = "Frequência";
+
+        body.appendChild(tabela);
+        tabela.appendChild(titulo);
+        tabela.appendChild(cabecalho);
+        cabecalho.appendChild(titulos);
+        tabela.appendChild(campoPrincipal);
+        titulos.appendChild(ordemNumerica);
+        titulos.appendChild(tituloNome);
+        titulos.appendChild(tituloNota1);
+        titulos.appendChild(tituloNota2);
+        titulos.appendChild(tituloNotaFinal);
+        titulos.appendChild(tituloFrequencia);
+
         for(let i = 0; i < array.length; i++) {
 
             var novaLinha = document.createElement('tr');
@@ -120,13 +128,16 @@ function gerarTabela(array) {
             novaLinha.appendChild(mediaNovoAluno);
             novaLinha.appendChild(frequenciaNovoAluno);
         }
+    } else {
+        return alert("Não há alunos cadastrados!");
     }
 }
 
+//"Tela inicial" do sistema onde se escolhe a ação a ser feita
 let op = "";
 
 do {
-    op = prompt("Sistema de notas\nDigite A para adicionar dados de um aluno e S para gerar a tabela").toUpperCase();
+    op = prompt("Sistema de notas\nDigite A para adicionar dados de um aluno e S para gerar o boletim").toUpperCase();
 
     switch(op) {
         case "A":
