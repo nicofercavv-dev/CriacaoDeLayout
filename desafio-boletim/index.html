@@ -10,24 +10,48 @@
     * {
         margin: 0px;
         padding: 0px;
-    }
-    div {
-        max-width: 800px;
-        height: auto;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
     table {
+        margin: auto;
         border-collapse: collapse;
     }
 
-    thead {
-        background-color: rgb(255, 208, 0);
+    caption {
+        padding: 10px 0px;
+        font-size: 1.5em;
+        font-weight: bold;
     }
+
+    .vazio {
+        background-color: rgba(255, 255, 255, 0);
+        border: none;
+    }
+
     th {
+        background-color: rgb(255, 208, 0);
         width: auto;
         height: 30px;
         padding: 10px 15px;
-        border-spacing: 0px 0px;
+        border: 2px solid black;
+    }
+
+    .aprovado {
+        background-color: rgb(199, 247, 199);
+        border: 2px solid black;
+    }
+
+    .reprovado {
+        background-color: rgb(236, 142, 142);
+        border: 2px solid black;
+    }
+
+    td {
+        width: auto;
+        height: 30px;
+        text-align: center;
+        padding: 10px 15px;
         border: 2px solid black;
     }
 </style>

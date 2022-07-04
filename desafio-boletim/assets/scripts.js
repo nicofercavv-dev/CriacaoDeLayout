@@ -58,11 +58,14 @@ function adicionarNovoAluno(array) {
 function gerarTabela(array) {
     var body = document.getElementById('body');
     var tabela = document.createElement('table');
+    var titulo = document.createElement('caption');
+    titulo.innerHTML = "Boletim";
     var cabecalho = document.createElement('thead');
     var campoPrincipal = document.createElement('tbody');
     var titulos = document.createElement('tr');
     var ordemNumerica = document.createElement('th');
     ordemNumerica.innerHTML = "";
+    ordemNumerica.classList.add('vazio');
     var tituloNome = document.createElement('th');
     tituloNome.innerHTML = "Nome";
     var tituloNota1 = document.createElement('th');
@@ -75,6 +78,7 @@ function gerarTabela(array) {
     tituloFrequencia.innerHTML = "Frequência";
 
     body.appendChild(tabela);
+    tabela.appendChild(titulo);
     tabela.appendChild(cabecalho);
     cabecalho.appendChild(titulos);
     tabela.appendChild(campoPrincipal);
@@ -101,6 +105,12 @@ function gerarTabela(array) {
             mediaNovoAluno.innerHTML = array[i].mediaFinal.toFixed(2);
             var frequenciaNovoAluno = document.createElement('td');
             frequenciaNovoAluno.innerHTML = array[i].frequencia + "%";
+
+            if(array[i].aprovado == false) {
+                novaLinha.classList.add('reprovado');
+            } else {
+                novaLinha.classList.add('aprovado');
+            }
     
             campoPrincipal.appendChild(novaLinha);
             novaLinha.appendChild(ordemNumericaNovoAluno);
