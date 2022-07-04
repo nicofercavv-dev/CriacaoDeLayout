@@ -85,6 +85,9 @@ function gerarTabela(array) {
         tituloNotaFinal.innerHTML = "Nota Final";
         var tituloFrequencia = document.createElement('th');
         tituloFrequencia.innerHTML = "Frequência";
+        var rodape = document.createElement('footer');
+        var p = document.createElement('p');
+        p.innerHTML = "Criado por Nicole Ferreira";
 
         body.appendChild(tabela);
         tabela.appendChild(titulo);
@@ -97,6 +100,8 @@ function gerarTabela(array) {
         titulos.appendChild(tituloNota2);
         titulos.appendChild(tituloNotaFinal);
         titulos.appendChild(tituloFrequencia);
+        body.appendChild(rodape);
+        rodape.appendChild(p);
 
         for(let i = 0; i < array.length; i++) {
 
